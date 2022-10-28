@@ -1,15 +1,15 @@
 <template>
-	<hello-world />
+	<ScrollTable />
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld';
+import ScrollTable from '@/components/ScrollTable';
 
 export default {
 	name: 'Home',
 
 	components: {
-		HelloWorld,
+		ScrollTable,
 	},
 };
 </script>
