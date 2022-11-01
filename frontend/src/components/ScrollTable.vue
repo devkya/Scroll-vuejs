@@ -258,7 +258,7 @@ export default {
 }
 
 #scrollHeight1 ::v-deep thead,
-tr {
+tbody tr {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
@@ -271,7 +271,7 @@ tr {
 }
 
 #scrollHeight2 ::v-deep thead,
-tr {
+tbody tr {
 	display: table;
 	width: 100%;
 	table-layout: fixed;
