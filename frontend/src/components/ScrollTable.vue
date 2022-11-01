@@ -1,171 +1,50 @@
 <template>
 	<div>
+		<!-- tbody scrollHeight 테스트 -->
 		<v-row justify="center" align="center" class="pa-5">
-			<v-subheader>Offset Top1</v-subheader>
-			{{ offsetTop1 }}
+			<v-subheader>Offset Top5</v-subheader>
+			{{ offsetTop5 }}
+			<v-btn @click="ScrollHeight" class="ma-5">TEST</v-btn>
 		</v-row>
-		<v-container
-			id="scroll-target"
-			style="max-height: 400px; border: 2px solid black"
-			class="overflow-y-auto"
-		>
-			<v-row
-				v-scroll:#scroll-target="onScroll"
-				align="center"
-				justify="center"
-				style="height: 1000px"
-			>
-			</v-row>
-		</v-container>
-
-		<!-- scrollbar가 두개 생겼음 -->
-		<v-row justify="center" align="center" class="pa-5">
-			<v-subheader>Offset Top2</v-subheader>
-			{{ offsetTop2 }}
-		</v-row>
-		<div
-			id="scroll-table"
-			style="max-height: 400px; border: 2px solid black"
-			class="overflow-y-auto"
-		>
-			<v-data-table
-				:headers="headers"
-				:items="desserts"
-				class="elevation-1"
-				:disable-pagination="true"
-				height="500px"
-				:fixed-header="true"
-				v-scroll:#scroll-table="onScrollTable"
-			>
-			</v-data-table>
-		</div>
-
-		<v-row justify="center" align="center" class="pa-5">
-			<v-subheader>Offset Top3</v-subheader>
-			{{ offsetTop3 }}
-			<v-btn class="ma-3" @click="testScroll">Move</v-btn>
-		</v-row>
-
-		<v-row justify="center" align="center" class="pa-3">
-			<v-data-table
-				ref="target-test"
-				id="target-table"
-				:headers="headers"
-				:items="desserts"
-				class="overflow-y-auto elevation-1"
-				:disable-pagination="true"
-				height="300px"
-			>
-				<template v-slot:body="{ items }">
-					<tbody>
-						<tr v-for="item in items" :key="item.name">
-							<td>{{ item.name }}</td>
-						</tr>
-					</tbody>
-				</template>
-			</v-data-table>
-		</v-row>
-
-		<v-row justify="center" align="center" class="pa-5">
-			<v-subheader>Offset Top3</v-subheader>
-			{{ offsetTop3 }}
-			<v-btn class="ma-5" @click="testFunc">TEST</v-btn>
-		</v-row>
-		<v-row justify="center" align="center" class="pa-3">
-			<v-col>
-				<v-data-table
-					ref="target1"
-					id="table1"
-					:headers="headers"
-					:items="desserts"
-					class="overflow-y-auto elevation-1"
-					:disable-pagination="true"
-					height="300px"
-					@scroll.passive="testScroll"
-				></v-data-table>
-			</v-col>
-			<v-col>
-				<v-data-table
-					ref="target2"
-					id="table2"
-					:headers="headers"
-					:items="desserts"
-					class="overflow-y-auto elevation-1"
-					:disable-pagination="true"
-					height="300px"
-				></v-data-table>
-			</v-col>
-		</v-row>
-
-		<v-row justify="center" align="center" class="pa-5">
-			<v-subheader>Offset Top1</v-subheader>
-			{{ offsetTop1 }}
-		</v-row>
-		<v-container
-			id="scroll-target"
-			style="max-height: 400px; border: 2px solid black"
-			class="overflow-y-auto"
-			@scroll.passive="testScroll"
-		>
-			<v-row align="center" justify="center" style="height: 1000px"> </v-row>
-		</v-container>
-		<v-row justify="center" align="center" class="pa-5">
-			<v-subheader>Offset Top4</v-subheader>
-			{{ offsetTop4 }}
-			<v-btn @click="testFunc">TEST</v-btn>
-		</v-row>
-		<!-- 여기서부터 되는 코드임 -->
 		<v-data-table
+			id="scrollHeight1"
 			:headers="headers"
+			:items="desserts"
 			:disable-pagination="true"
-			:hide-default-footer="true"
 		>
-			<template v-slot:no-data> <tr style="display: none" /></template>
-		</v-data-table>
-		<div id="target-div" style="height: 200px; overflow: scroll">
-			<v-data-table
-				id="please"
-				ref="please"
-				:headers="headers"
-				:items="desserts"
-				class="overflow-y-auto elevation-1"
-				:disable-pagination="true"
-			>
-				<template v-slot:header="{ props }">
-					<thead>
-						<tr>
-							<th
-								class="fixedHeader"
-								v-for="head in props.headers"
-								:key="head.value"
-							>
-								{{ head.text }}
-							</th>
-						</tr>
-					</thead>
-				</template>
-			</v-data-table>
-		</div>
-
-		<div class="pa-4"></div>
-		<div class="container">
-			<table id="customTable">
-				<thead>
-					<th class="fixedHeader">name</th>
-					<th class="fixedHeader">no</th>
-					<th class="fixedHeader">dept</th>
-					<th class="fixedHeader">kya</th>
-				</thead>
-				<tbody>
-					<tr v-for="item in desserts" :key="item.name">
-						<td>h{{ item.name }}</td>
-						<td>h{{ item.calories }}</td>
-						<td>h{{ item.fat }}</td>
-						<td>h{{ item.carbs }}</td>
+			<template v-slot:body="{ items }">
+				<tbody id="scrollHeight-tbody1" v-scroll.self="ScrollHeight">
+					<tr v-for="(item, idx) in items" :key="idx">
+						<td>{{ item.name }}</td>
+						<td>{{ item.calories }}</td>
+						<td>{{ item.fat }}</td>
+						<td>{{ item.carbs }}</td>
+						<td>{{ item.protein }}</td>
+						<td>{{ item.iron }}</td>
 					</tr>
-				</tbody>
-			</table>
-		</div>
+				</tbody></template
+			>
+		</v-data-table>
+
+		<v-data-table
+			id="scrollHeight2"
+			:headers="headers"
+			:items="desserts"
+			:disable-pagination="true"
+		>
+			<template v-slot:body="{ items }">
+				<tbody id="scrollHeight-tbody2" v-scroll.self="ScrollHeight">
+					<tr v-for="(item, idx) in items" :key="idx">
+						<td>{{ item.name }}</td>
+						<td>{{ item.calories }}</td>
+						<td>{{ item.fat }}</td>
+						<td>{{ item.carbs }}</td>
+						<td>{{ item.protein }}</td>
+						<td>{{ item.iron }}</td>
+					</tr>
+				</tbody></template
+			>
+		</v-data-table>
 	</div>
 </template>
 <script>
@@ -175,10 +54,7 @@ export default {
 	data() {
 		return {
 			target: null,
-			offsetTop1: 0,
-			offsetTop2: 0,
-			offsetTop3: 0,
-			offsetTop4: 0,
+			offsetTop5: 0,
 			headers: [
 				{
 					text: 'Dessert (100g serving)',
@@ -358,49 +234,46 @@ export default {
 	},
 	setup() {},
 	created() {},
-	mounted() {
-		this.target = document.querySelector('#target-div');
-		this.target.addEventListener('scroll', this.handleScroll);
-	},
+	mounted() {},
 	unmounted() {},
 	methods: {
-		handleScroll(e) {
-			var scrollTop = e.target.scrollTop;
-			console.log(scrollTop);
-		},
-
-		onScroll(e) {
-			this.offsetTop1 = e.target.scrollTop;
-		},
-		onScrollTable(e) {
-			this.offsetTop2 = e.target.scrollTop;
-		},
-		onScrollTable2() {
-			console.log('onScrollTable2...');
-			console.log(this.offsetTop3);
-		},
-		testScroll(e) {
-			console.log('testScroll()..');
-			this.offsetTop3 = e.target.scrollTop;
-		},
-		testFunc() {
-			var t = document.getElementById('target-div').scrollTop;
-			console.log(t);
-			console.log(this.$refs.please);
+		ScrollHeight(e) {
+			this.offsetTop5 = e.target.scrollTop;
+			document.getElementById('scrollHeight-tbody1').scrollTop =
+				this.offsetTop5;
+			document.getElementById('scrollHeight-tbody2').scrollTop =
+				this.offsetTop5;
 		},
 	},
 };
 </script>
-<style>
-.container {
+<style scoped>
+#scrollHeight1 ::v-deep ::-webkit-scrollbar {
+	display: none;
+}
+#scrollHeight1 ::v-deep tbody {
+	display: block;
 	height: 300px;
 	overflow: auto;
 }
 
-.fixedHeader {
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0px;
-	background-color: yellow;
+#scrollHeight1 ::v-deep thead,
+tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+#scrollHeight2 ::v-deep tbody {
+	display: block;
+	height: 300px;
+	overflow: auto;
+}
+
+#scrollHeight2 ::v-deep thead,
+tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
 }
 </style>
